@@ -13,8 +13,8 @@ import Signup from './Pages/Registeration/Signup'
 import ProductInfo from './Pages/ProductInfo/ProductInfo'
 import AddProduct from './Pages/Admin/Pages/AddProduct'
 import UpdateProduct from './Pages/Admin/Pages/UpdateProduct'
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
   return(
@@ -34,10 +34,15 @@ function App() {
       <Route element = {<Cart/>} path = "/cart"></Route>
       <Route element = {<AddProduct/>} path = "/addproduct"></Route>
       <Route element = {<UpdateProduct/>} path = "/updateproduct"></Route>
+   
     </Routes>
+    <ToastContainer/>
     </BrowserRouter>
     </MyState>
   )
  
 }
 export default App
+
+
+//order sirf user hi dekh skta hn
