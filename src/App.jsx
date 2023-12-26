@@ -14,6 +14,7 @@ import ProductInfo from './Pages/ProductInfo/ProductInfo'
 import AddProduct from './Pages/Admin/Pages/AddProduct'
 import UpdateProduct from './Pages/Admin/Pages/UpdateProduct'
 import { ToastContainer, toast } from 'react-toastify';
+import { Navigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
@@ -23,9 +24,19 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route element = {<Home/>} path = "/"></Route>
-      <Route element = {<Dashboard/>} path = "/dashboard"></Route>
+      <Route element = {
+      <ProtectedRoutesForAdmin>
+      <Dashboard/>
+      </ProtectedRoutesForAdmin>
+      } path = "/dashboard"></Route>
       <Route element = {<Cart/>} path = "/cart"></Route>
-      <Route element = {<Order/>} path = "/order"></Route>
+      <Route element = {
+      <ProtectedRoutes>
+      <Order/>
+      </ProtectedRoutes>
+      } path = "/order">
+
+      </Route>
       <Route element = {<Nopage/>} path = "/nopage"></Route>
       <Route element = {<Login/>} path = "/login"></Route>
       <Route element = {<Signup/>} path = "/signup"></Route>
@@ -46,3 +57,25 @@ export default App
 
 
 //order sirf user hi dekh skta hn
+//children me mera navbar order aega
+export const ProtectedRoutes = ({children})=>{
+  // const user = JSON.stringify(localStorage.getItem('user'));
+  if(user){
+    return children
+  }
+  else{
+    return <Navigate to = {"/login"}/>
+  }
+}
+
+
+
+//admin
+export const ProtectedRoutesForAdmin =({children})=>{
+  const admin = JSON.parse(localStorage.getItem('user'));
+  if(admin.user.email === "rehantthapa@gmail.com"){
+    return children
+  }
+  return <Navigate to  = {"/login"}/>
+}
+
