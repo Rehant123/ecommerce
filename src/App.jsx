@@ -15,6 +15,7 @@ import AddProduct from './Pages/Admin/Pages/AddProduct'
 import UpdateProduct from './Pages/Admin/Pages/UpdateProduct'
 import { ToastContainer, toast } from 'react-toastify';
 import { Navigate } from 'react-router-dom'
+
 import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
@@ -41,7 +42,7 @@ function App() {
       <Route element = {<Login/>} path = "/login"></Route>
       <Route element = {<Signup/>} path = "/signup"></Route>
       <Route element = {<ProductInfo/>} path = "/productinfo/:id"></Route>
-
+     
       <Route element = {<Cart/>} path = "/cart"></Route>
       <Route element = {<AddProduct/>} path = "/addproduct"></Route>
       <Route element = {<UpdateProduct/>} path = "/updateproduct"></Route>

@@ -5,6 +5,7 @@ import { fireDB } from "../Firebase/Firebaseconfig";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import {toast} from "react-toastify";
+import { addToCart } from "../Redux/cartSlice";
 export default function MyState(props){
     const [mode,setMode] = useState("dark");
     const toggleMode = ()=>{
@@ -98,30 +99,34 @@ export default function MyState(props){
         setProducts(item);
     }
 
-
-    const updateProducts = async(item)=>{
-        setLoading(false);
-        console.log(products);
-        try{
-            const productref = doc(fireDB,"products",products.id);
-            //get this specific field 
-
-            await updateDoc(productref,products);
-            //add this products
-            toast.success("Product successfully updated");
-            setLoading(false);
-            getProductData()
-
-
-
-        }catch(error){
-            console.log(error);
-            setLoading(false);
-            
+    const updateProducts = async () => {
+        setLoading(true);
+        try {
+          const productref = doc(fireDB, "products", products.id);
+      
+          // Update the document with the fields from the products state
+          await updateDoc(productref, {
+            title: products.title,
+            price: products.price,
+            imageURL: products.imageURL,
+            category: products.category,
+            description: products.description,
+            time: products.time,
+            date: products.date,
+          });
+      
+          // Add any other fields as needed
+          toast.success("Product successfully updated");
+          setLoading(false);
+          setTimeout(()=>{
+            window.location.href = "/dashboard"
+          },800)
+          getProductData();
+        } catch (error) {
+          console.error(error);
+          setLoading(false);
         }
-
-
-    }
+      };
 
     //delete products
     

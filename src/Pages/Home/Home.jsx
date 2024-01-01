@@ -17,7 +17,7 @@ export default function Home() {
 
   const cartItem  = useSelector(state=>state.cart);
   const dispatch = useDispatch();
-  console.log(cartItem);
+
   const addCart = ()=>{
     dispatch(addToCart("shirts"));
   }
@@ -34,10 +34,7 @@ export default function Home() {
   
   return (
     <Layout>
-      <div className="">
-        <button className = "text-white m-2" onClick = {()=>addCart()}>Add To cart</button>
-        <button className = "text-white" onClick = {()=>deleteCart()}>Delete From cart</button>
-      </div>
+      
     <HeroSection></HeroSection>
     <Filter></Filter>
     <ProductCard></ProductCard>
