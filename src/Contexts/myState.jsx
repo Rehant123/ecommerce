@@ -19,7 +19,9 @@ export default function MyState(props){
             document.body.backgroundColor = "white";
         }
     }
+    
     const [loading,setLoading] = useState(false);
+
 
     const [products,setProducts] = useState({
         title:null,
