@@ -96,6 +96,28 @@ export default function MyState(props){
         }
     }
 
+
+    //get orders
+    const[order,setOrders] =useState([]);
+    
+    
+    const getOrderdata = async()=>{
+        setLoading(true);
+        try{
+            const result = await getDocs(collection(fireDB,"order"));
+            const orderarray =[];
+            result.forEach((doc)=>{
+                orderarray.push({...doc.data(),id:doc.id});
+
+            })
+            setOrders(orderarray);
+            setLoading(false);
+
+        }catch(e){
+            console.log(e);
+            setLoading(false);
+        }
+    }
     //update products
     const edithandle = (item)=>{
         setProducts(item);
@@ -155,9 +177,11 @@ export default function MyState(props){
 
     useEffect(()=>{
         getProductData();
+        getOrderdata();
+
     },[]);
     return (
-        <MyContext.Provider value = {{mode,toggleMode,loading,setLoading,product,setProducts,products,addProduct,updateProducts,edithandle,deleteProduct}}>
+        <MyContext.Provider value = {{mode,toggleMode,loading,setLoading,product,setProducts,products,addProduct,updateProducts,edithandle,deleteProduct,order}}>
         {props.children}
         </MyContext.Provider>
     )   

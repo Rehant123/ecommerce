@@ -6,6 +6,6 @@ import { Provider } from 'react-redux';
 
 export const store = configureStore({
     reducer:{
-        cart:cartSlice
+         cart:cartSlice 
     },devTools:true
 })

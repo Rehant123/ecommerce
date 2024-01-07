@@ -60,7 +60,7 @@ export default App
 //order sirf user hi dekh skta hn
 //children me mera navbar order aega
 export const ProtectedRoutes = ({children})=>{
-  // const user = JSON.stringify(localStorage.getItem('user'));
+  const user = JSON.stringify(localStorage.getItem('user'));
   if(user){
     return children
   }
